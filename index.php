@@ -34,3 +34,73 @@ $esmalte->vender(3);
 $esmalte->resumo();
 
 echo'<br><br>----------------------------------------Atividade 2----------------------------------------<br><br>';
+// .
+// .
+// .
+echo'<br><br>----------------------------------------Atividade 4----------------------------------------<br><br>';
+Class Biblioteca{
+    public $nome;
+    public array $livros;
+    public function __construct(string $nome){
+        $this->nome = $nome;
+    }
+    public function adicionarLivro(string $titulo){
+        $this->livros[] = $titulo;
+    }
+    public function buscarLivro(string $termo){
+
+    }
+    public function listarLivros(){
+        echo "Lista dos livros cadastrados:<br><br>";
+        foreach ($this->livros as $livro){
+            echo "- ".$livro. "<br>";
+        }
+    }
+}
+$livro = new Biblioteca("Sonhos Encantados");
+$livro -> adicionarLivro("Dom Casmurro");
+$livro -> adicionarLivro("Amor e Gelato");
+$livro -> adicionarLivro("Noite na Taverna");
+$livro -> listarLivros();
+echo'<br><br>----------------------------------------Atividade 5----------------------------------------<br><br>';
+Class Pedido{
+    public $cliente;
+    public array $itens;
+    public function __construct($cliente){
+        $this->cliente = $cliente;
+    }
+    public function adicionarItem(Produto $produto, int $quantidade){
+    }
+    public function total(){
+        echo "Total do pedido: ".tt;
+    }
+    public function detalhes(){
+        echo "<br><br>Detalhes do pedido:<br>";
+    }
+}
+$pedido = new Pedido("Theobaldo");
+echo'<br><br>----------------------------------------Atividade 6----------------------------------------<br><br>';
+class Turma{
+    public $disciplina;
+    public array $alunos;
+     public function __construct($disciplina){
+        $this->disciplina = $disciplina;
+    }
+    public function adicionarAluno(Aluno $aluno){
+        $this->alunos[] = $aluno;
+        echo "O aluno: ".$aluno. "foi matriculado<br>";
+    }
+    public function melhorAluno(){
+        
+    }
+    public function resultadoFinal(){
+        foreach ($this->alunos as $aluno){
+            echo "";
+        }
+    }
+}
+$aluno = new Turma("Português");
+$aluno -> adicionarAluno("João");
+$aluno -> adicionarAluno("Maria");
+$aluno -> adicionarAluno("Jefferson");
+$aluno -> melhorAluno();
