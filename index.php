@@ -34,11 +34,86 @@ $esmalte->vender(3);
 $esmalte->resumo();
 
 echo'<br><br>----------------------------------------Atividade 2----------------------------------------<br><br>';
-// .
-// .
-// .
+
+class Aluno {
+    public string $nome;
+    public string $matricula;
+    public array $notas;
+
+    public function __construct (string $nome, string $matricula) {
+        $this->nome = $nome;
+        $this->matricula = $matricula;
+    }
+    public function adicionarNota (float $nota) {
+        $this->notas[] = $nota;
+    }
+    public function media () {
+        $media = 0.00;
+        $i = 0;
+        foreach ($this->notas as $nota) {
+        $i = $i + 1;
+        $media += $nota;
+    }
+    $media = $media/$i;
+    return $media;
+    }
+    public function aprovado () {
+        if ($this->media() >= 6){
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+}
+$aluno = new Aluno("Robson", "001");
+$aluno -> adicionarNota(8);
+$aluno -> adicionarNota(7);
+$aluno -> adicionarNota(4);
+$aluno -> adicionarNota(10);
+$aluno -> media();
+$aluno -> aprovado();
+echo "A média do aluno:". $aluno->nome. " é:".$aluno->media(). "<br>";
+echo "O aluno foi:". $aluno->aprovado(). "<br>1 - Aprovado<br>2 - Reprovado";
+
+echo'<br><br>----------------------------------------Atividade 3----------------------------------------<br><br>';
+
+class ContaBancaria {
+    public $titular;
+    public $saldo;
+        public function __construct(string $titular, float $saldo){
+            $this->titular = $titular;
+            $this->saldo = $saldo;
+        }  
+    public function depositar(float $valor){
+        $this->saldo = $this->saldo + $valor;
+        echo "Você depositou: R$". $this->saldo. "<br>";
+    } 
+    public function sacar (float $valor){
+        if ($valor <= $this->saldo){
+            $this->saldo -= $valor;
+            echo "Valor de saque de: R$". $valor. "<br> Saldo atual da conta: R$". $this->saldo;
+        }
+        else{
+            echo "tt";
+            return false;
+        }
+    }
+    public function transferir(ContaBancaria $destino, float $valor){
+        $this->saldo = $this->saldo - $valor;
+        $desino += $valor;
+        echo "Valor depositado a: ". $destino. " no valor de: R$". $valor;
+        echo "<br><br>Saldo atual da conta: R$". $this->saldo;
+    }
+}
+$titular = new ContaBancaria("Jeremias", 1500);
+$titular -> depositar(4);
+$titular -> sacar(500);
+$titular = new ContaBancaria ("Roberta", 300);
+$titular -> transferir("Roberta", 1000);
+
 echo'<br><br>----------------------------------------Atividade 4----------------------------------------<br><br>';
-Class Biblioteca{
+    Class Biblioteca{
     public $nome;
     public array $livros;
     public function __construct(string $nome){
@@ -104,3 +179,5 @@ $aluno -> adicionarAluno("João");
 $aluno -> adicionarAluno("Maria");
 $aluno -> adicionarAluno("Jefferson");
 $aluno -> melhorAluno();
+
+echo'<br><br>----------------------------------------Atividade 7----------------------------------------<br><br>';
