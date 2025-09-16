@@ -101,16 +101,16 @@ class ContaBancaria {
     }
     public function transferir(ContaBancaria $destino, float $valor){
         $this->saldo = $this->saldo - $valor;
-        $desino += $valor;
-        echo "Valor depositado a: ". $destino. " no valor de: R$". $valor;
+        $destino->saldo += $valor;
+        echo "<br>Valor depositado a: ". $destino->titular. " no valor de: R$". $valor;
         echo "<br><br>Saldo atual da conta: R$". $this->saldo;
     }
 }
-$titular = new ContaBancaria("Jeremias", 1500);
+$titular = new ContaBancaria("Arthur S.", 1500);
 $titular -> depositar(4);
 $titular -> sacar(500);
-$titular = new ContaBancaria ("Roberta", 300);
-$titular -> transferir("Roberta", 1000);
+$titular2 = new ContaBancaria ("Roberta", 300);
+$titular -> transferir($titular2, 1000);
 
 echo'<br><br>----------------------------------------Atividade 4----------------------------------------<br><br>';
     Class Biblioteca{
