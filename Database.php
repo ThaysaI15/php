@@ -43,4 +43,10 @@ nome VARCHAR(100) NOT NULL,
 email VARCHAR(100) UNIQUE NOT NULL
 )");
 
+$db = new Database();
+$db->inserir ("usarios", [nome=>"Anelize",
+"email"=>"aa@gmail.com"]);
+$db -> inserir("usuarios", [nome=>"Thaysa",
+"email"=>"tt@gmail.com"]);
+
 ?>
