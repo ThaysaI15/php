@@ -67,12 +67,23 @@ class Aluno {
     }
 }
 $aluno = new Aluno("Robson", "001");
-$aluno -> adicionarNota(8);
-$aluno -> adicionarNota(7);
-$aluno -> adicionarNota(4);
-$aluno -> adicionarNota(10);
+$aluno->adicionarNota(8);
+$aluno->adicionarNota(7);
+$aluno->adicionarNota(4);
+$aluno->adicionarNota(10);
 $aluno -> media();
 $aluno -> aprovado();
+
+$aluno2 = new Aluno("Maria", "002");
+$aluno2->adicionarNota(9);
+$aluno2->adicionarNota(10);
+$aluno2->adicionarNota(8.5);
+
+$aluno3 = new Aluno("João", "003");
+$aluno3->adicionarNota(5);
+$aluno3->adicionarNota(6);
+$aluno3->adicionarNota(4);
+
 echo "A média do aluno:". $aluno->nome. " é:".$aluno->media(). "<br>";
 echo "O aluno foi:". $aluno->aprovado(). "<br>1 - Aprovado<br>2 - Reprovado";
 
@@ -144,40 +155,123 @@ Class Pedido{
     public function __construct($cliente){
         $this->cliente = $cliente;
     }
-    public function adicionarItem(Produto $produto, int $quantidade){
+    public function adicionarItem(Produto $produto, int $quantidade){ 
+        $this->itens[] = [
+            "produto" => $produto,
+            "quantidade" => $quantidade
+        ];
+        echo "Item: ".$produto->nome." ".$quantidade."x foi adicionado ao pedido de ".$this->cliente."<br>";
     }
+    
     public function total(){
-        echo "Total do pedido: ".tt;
+        $total = 0;
+        foreach ($this->itens as $item){
+            $total += $item["produto"]->preco * $item["quantidade"];
+        }
+        echo "Total do pedido: R$".$total."<br>";
+        return $total;
     }
+    
     public function detalhes(){
-        echo "<br><br>Detalhes do pedido:<br>";
+        echo "<br>--- Detalhes do Pedido ---<br>";
+        echo "Cliente: ".$this->cliente."<br>";
+        echo "Itens:<br>";
+        foreach ($this->itens as $item){
+            $produto = $item["produto"];
+            $quantidade = $item["quantidade"];
+            $subtotal = $produto->preco * $quantidade;
+            echo "- ". $produto->nome." <br> Quantidade: ".$quantidade." <br> Preço Unitário: R$".$produto->preco." <br> Subtotal: R$".$subtotal."<br>";
+            echo "<br>--------------------------------------<br>";
+        }
+        echo "-----------------------------------<br>";
+        echo "Total do pedido: R$".$this->total()."<br>";
     }
 }
-$pedido = new Pedido("Theobaldo");
+    $esmalte = new Produto("Esmalte Azul", 10.00, 10);
+    $esmalte2 = new Produto("Esmalte preto", 12.00, 5);
+    
+    $pedido = new Pedido("Thaysa");
+    $pedido->adicionarItem($esmalte, 2);
+    $pedido->adicionarItem($esmalte2, 1);
+    $pedido->detalhes();
 echo'<br><br>----------------------------------------Atividade 6----------------------------------------<br><br>';
-class Turma{
-    public $disciplina;
-    public array $alunos;
-     public function __construct($disciplina){
+
+class Turma {
+    public string $disciplina;
+    public array $alunos = [];
+
+    public function __construct(string $disciplina){
         $this->disciplina = $disciplina;
     }
+
     public function adicionarAluno(Aluno $aluno){
         $this->alunos[] = $aluno;
-        echo "O aluno: ".$aluno. "foi matriculado<br>";
+        echo "Aluno ".$aluno->nome." matriculado na disciplina ".$this->disciplina."<br>";
     }
+
     public function melhorAluno(){
-        
-    }
-    public function resultadoFinal(){
+        if (empty($this->alunos)){
+            echo "Nenhum aluno matriculado.<br>";
+            return 0;
+        }
+        $melhor = $this->alunos[0];
         foreach ($this->alunos as $aluno){
-            echo "";
+            if ($aluno->media() > $melhor->media()){
+                $melhor = $aluno;
+            }
+        }
+        echo "O melhor aluno da turma é: ".$melhor->nome." com média ".$melhor->media()."<br>";
+        return $melhor;
+    }
+
+    public function resultadoFinal(){
+        echo "<br>--- Resultado Final da Turma ".$this->disciplina." ---<br>";
+        foreach ($this->alunos as $aluno){
+            if ($aluno->media() >= 6){
+                echo "Aluno: ".$aluno->nome." | Média: ".$aluno->media()." | Resultado: Aprovado <br>";
+            }
+            else{
+                echo "Aluno: ".$aluno->nome." | Média: ".$aluno->media()." | Resultado: Reprovado <br>";
+            }
         }
     }
 }
-$aluno = new Turma("Português");
-$aluno -> adicionarAluno("João");
-$aluno -> adicionarAluno("Maria");
-$aluno -> adicionarAluno("Jefferson");
-$aluno -> melhorAluno();
+
+$turma = new Turma("Português");
+$turma->adicionarAluno($aluno);
+$turma->adicionarAluno($aluno2);
+$turma->adicionarAluno($aluno3);
+
+$turma->melhorAluno();
+$turma->resultadoFinal();
 
 echo'<br><br>----------------------------------------Atividade 7----------------------------------------<br><br>';
+
+class Agenda {
+    public array $contatos = [];
+
+    public function adicionarContato(string $nome, string $telefone){
+        $this->contatos[$nome] = $telefone;
+        echo "Contato: ". $nome. " adicionado com sucesso!<br>";
+    }
+
+    public function removerContato(string $nome){
+            echo "<br>Contato:". $nome. " removido da agenda!<br>";
+    }
+
+    public function buscarContato(string $nome){
+        }
+
+    public function listarContatos(){
+    }
+}
+
+// Exemplo de uso
+$agenda = new Agenda();
+$agenda->adicionarContato("João", "1111-1111");
+$agenda->adicionarContato("Maria", "2222-2222");
+$agenda->adicionarContato("Ana", "3333-3333");
+
+$agenda->buscarContato("Maria");
+$agenda->removerContato("João");
+$agenda->listarContatos();
