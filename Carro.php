@@ -1,5 +1,5 @@
 <?php
-require 'pessoa.php';
+require 'Pessoa.php';
 //require '/PASTA/SUBBASTA/Pessoa.php';
 class Carro
 {
@@ -9,7 +9,9 @@ class Carro
     public $espaco;
     public $velocidade;
     public Pessoa $propietario;
-    public function __construct($motor, $torque, $peso, $espaco){
+    public ?int $id;
+    public function __construct($motor, $torque, $peso, $espaco, ?int $id = null){
+        $this->id = $id; //se não passar nada é null
         $this->motor = $motor;
         $this->torque = $torque;
         $this->peso = $peso;
